@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+  @apply relative min-h-0 min-w-0;
+}
+
+html, body {
+  @apply min-h-full min-h-screen
+}
