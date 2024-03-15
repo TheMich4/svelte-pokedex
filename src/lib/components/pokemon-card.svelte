@@ -2,21 +2,29 @@
 	import type { PokemonEntry } from 'pokenode-ts';
 
 	export let pokemon: PokemonEntry & { id: string };
+	export let caught: boolean;
 </script>
 
 <div
-	class="pokemon-card border rounded-lg bg-blue-200/20 border-blue-200/80 gap-2 flex items-center p-4 flex-col justify-between cursor-pointer"
+	class="pokemon-card border rounded-lg bg-blue-200/20 gap-2 flex items-center p-2 pb-3 flex-col justify-between cursor-pointer w-36 {caught
+		? 'border-blue-800/80'
+		: 'border-blue-200/80'}"
 >
-	<div class="label uppercase font-semibold tracking-tight text-center text-nowrap">
+	<div class="label uppercase font-bold tracking-tighter text-center text-nowrap">
 		{pokemon.pokemon_species.name}
 	</div>
-	<div class="circle rounded-full bg-blue-200/80 w-22 h-22 border-2 border-blue-200/80">
+	<div class="circle rounded-full bg-blue-200/80 border-2 border-blue-200/80">
 		<img
 			alt={pokemon.pokemon_species.name}
-			class="relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 align-middle z-10"
+			class="sprite relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 align-middle z-10"
 			src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
 		/>
 	</div>
+	{#if caught}
+		<div class="absolute w-5 h-5 bottom-1 right-1">
+			<img src="/pokeball.png" alt="Caught" />
+		</div>
+	{/if}
 </div>
 
 <style lang="postcss">
@@ -27,20 +35,16 @@
 	.pokemon-card:hover .label {
 	}
 
-	img {
+	.sprite {
 		@apply transition-all ease-in duration-200 delay-75;
 	}
 
-	.pokemon-card:hover img {
+	.pokemon-card:hover .sprite {
 		@apply transform scale-150;
 	}
 
 	.pokemon-card:hover .circle::before {
 		@apply border-t-blue-400 border-r-blue-400 border-b-blue-400;
-		/* border-top-color: blue; */
-		/* border-right-color: blue;
-		border-bottom-color: blue; */
-		transition-delay: 0.75s;
 
 		transition:
 			border-top-color 0.15s linear,
