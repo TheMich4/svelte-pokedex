@@ -5,10 +5,11 @@
 	export let caught: boolean;
 </script>
 
-<div
+<a
 	class="pokemon-card border rounded-lg bg-blue-200/20 gap-2 flex items-center p-2 pb-3 flex-col justify-between cursor-pointer w-36 {caught
 		? 'border-blue-800/80'
 		: 'border-blue-200/80'}"
+	href="/pokemon/{pokemon.id}"
 >
 	<div class="label uppercase font-bold tracking-tighter text-center text-nowrap">
 		{pokemon.pokemon_species.name}
@@ -25,7 +26,7 @@
 			<img src="/pokeball.png" alt="Caught" />
 		</div>
 	{/if}
-</div>
+</a>
 
 <style lang="postcss">
 	.pokemon-card {
@@ -58,9 +59,6 @@
 		border-left-width: 2px;
 		border-right-width: 2px;
 		transform: rotate(270deg);
-		transition:
-			transform 0.4s linear 0s,
-			border-left-width 0s linear 0.35s;
 	}
 
 	.circle {
@@ -90,6 +88,9 @@
 		border-radius: 100%;
 		top: 0;
 		left: 0;
+		transition:
+			transform 0.4s linear 0s,
+			border-left-width 0s linear 0.35s;
 	}
 
 	.pokemon-card:hover .circle {

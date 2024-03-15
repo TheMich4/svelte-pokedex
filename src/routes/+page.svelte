@@ -8,7 +8,9 @@
 </script>
 
 <div class="flex min-w-screen min-h-screen justify-center items-center bg-blue-300 p-8">
-	<div class="w-fit-content grid grid-cols-5 gap-4 max-w-[800px]">
+	<div
+		class="w-fit-content grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-[800px]"
+	>
 		{#each data.pokemons as pokemon}
 			<PokemonCard {pokemon} {caught} />
 		{/each}
