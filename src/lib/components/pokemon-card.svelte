@@ -1,0 +1,94 @@
+<script lang="ts">
+	import type { PokemonEntry } from 'pokenode-ts';
+
+	export let pokemon: PokemonEntry & { id: string };
+</script>
+
+<div
+	class="pokemon-card border rounded-lg bg-blue-200/20 border-blue-200/80 gap-2 flex items-center p-4 flex-col justify-between cursor-pointer"
+>
+	<div class="label uppercase font-semibold tracking-tight text-center text-nowrap">
+		{pokemon.pokemon_species.name}
+	</div>
+	<div class="circle rounded-full bg-blue-200/80 w-22 h-22 border-2 border-blue-200/80">
+		<img
+			alt={pokemon.pokemon_species.name}
+			class="relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 align-middle z-10"
+			src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+		/>
+	</div>
+</div>
+
+<style lang="postcss">
+	.pokemon-card {
+		transition: transform 0.2s ease-in-out;
+	}
+
+	.pokemon-card:hover .label {
+	}
+
+	img {
+		@apply transition-all ease-in duration-200 delay-75;
+	}
+
+	.pokemon-card:hover img {
+		@apply transform scale-150;
+	}
+
+	.pokemon-card:hover .circle::before {
+		@apply border-t-blue-400 border-r-blue-400 border-b-blue-400;
+		/* border-top-color: blue; */
+		/* border-right-color: blue;
+		border-bottom-color: blue; */
+		transition-delay: 0.75s;
+
+		transition:
+			border-top-color 0.15s linear,
+			border-right-color 0.15s linear 0.1s,
+			border-bottom-color 0.15s linear 0.2s;
+	}
+
+	.pokemon-card:hover .circle::after {
+		@apply border-t-blue-400 border-t-2;
+		/* border-top: 2px solid; */
+		border-left-width: 2px;
+		border-right-width: 2px;
+		transform: rotate(270deg);
+		transition:
+			transform 0.4s linear 0s,
+			border-left-width 0s linear 0.35s;
+	}
+
+	.circle {
+		@apply transition-colors duration-150;
+		box-shadow: none;
+		color: red;
+		font-size: inherit;
+		font-weight: 700;
+		/* transform: rotate(-45deg); */
+	}
+
+	.circle::before {
+		border: 2px solid transparent;
+	}
+
+	.circle::after {
+		border: 0 solid transparent;
+	}
+
+	.circle::before,
+	.circle::after {
+		box-sizing: inherit;
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		border-radius: 100%;
+		top: 0;
+		left: 0;
+	}
+
+	.pokemon-card:hover .circle {
+		@apply bg-inherit border-blue-200;
+	}
+</style>
