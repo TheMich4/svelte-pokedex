@@ -12,7 +12,7 @@
 		class="w-fit-content grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-[800px]"
 	>
 		{#each data.pokemons as pokemon}
-			<PokemonCard {pokemon} {caught} />
+			<PokemonCard {pokemon} {caught} delay={10 * pokemon.entry_number} />
 		{/each}
 	</div>
 </div>

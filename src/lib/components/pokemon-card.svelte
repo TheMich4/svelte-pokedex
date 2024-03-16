@@ -1,32 +1,45 @@
 <script lang="ts">
 	import type { PokemonEntry } from 'pokenode-ts';
+	import { scale } from 'svelte/transition';
+	import { quintOut } from 'svelte/easing';
+	import { onMount } from 'svelte';
 
 	export let pokemon: PokemonEntry & { id: string };
 	export let caught: boolean;
+	export let delay: number;
+
+	let mounted = false;
+
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
-<a
-	class="pokemon-card border rounded-lg bg-blue-200/20 gap-2 flex items-center p-2 pb-3 flex-col justify-between cursor-pointer w-36 {caught
-		? 'border-blue-800/80'
-		: 'border-blue-200/80'}"
-	href="/pokemon/{pokemon.id}"
->
-	<div class="label uppercase font-bold tracking-tighter text-center text-nowrap">
-		{pokemon.pokemon_species.name}
-	</div>
-	<div class="circle rounded-full bg-blue-200/80 border-2 border-blue-200/80">
-		<img
-			alt={pokemon.pokemon_species.name}
-			class="sprite relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 align-middle z-10"
-			src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
-		/>
-	</div>
-	{#if caught}
-		<div class="absolute w-5 h-5 bottom-1 right-1">
-			<img src="/pokeball.png" alt="Caught" />
+{#if mounted}
+	<a
+		class="pokemon-card border rounded-lg bg-blue-200/20 gap-2 flex items-center p-2 pb-3 flex-col justify-between cursor-pointer w-36 {caught
+			? 'border-blue-800/80'
+			: 'border-blue-200/80'}"
+		href="/pokemon/{pokemon.id}"
+	>
+		<div class="label uppercase font-bold tracking-tighter text-center text-nowrap">
+			{pokemon.pokemon_species.name}
 		</div>
-	{/if}
-</a>
+		<div class="circle rounded-full bg-blue-200/80 border-2 border-blue-200/80">
+			<img
+				alt={pokemon.pokemon_species.name}
+				class="sprite relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 align-middle z-10"
+				src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+				transition:scale={{ duration: 500, delay, opacity: 0.5, start: 0.0, easing: quintOut }}
+			/>
+		</div>
+		{#if caught}
+			<div class="absolute w-5 h-5 bottom-1 right-1">
+				<img src="/pokeball.png" alt="Caught" />
+			</div>
+		{/if}
+	</a>
+{/if}
 
 <style lang="postcss">
 	.pokemon-card {
