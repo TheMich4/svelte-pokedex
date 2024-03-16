@@ -22,7 +22,7 @@
 			: 'border-blue-200/80'}"
 		href="/pokemon/{pokemon.id}"
 	>
-		<div class="label uppercase font-bold tracking-tighter text-center text-nowrap">
+		<div class="label uppercase font-semibold tracking-tight text-center text-nowrap">
 			{pokemon.pokemon_species.name}
 		</div>
 		<div class="circle rounded-full bg-blue-200/80 border-2 border-blue-200/80">
