@@ -5,7 +5,6 @@ export async function load({ params }) {
 
 	const api = new MainClient();
 	const pokemon = await api.pokemon.getPokemonById(id);
-	console.log({ pokemon });
 
 	return {
 		id,

@@ -20,9 +20,13 @@
 		class="pokemon-card border rounded-lg bg-blue-200/20 gap-2 flex items-center p-2 pb-3 flex-col justify-between cursor-pointer w-36 {caught
 			? 'border-blue-800/80'
 			: 'border-blue-200/80'}"
+		data-flip-id="pokemon-card-{pokemon.id}"
 		href="/pokemon/{pokemon.id}"
 	>
-		<div class="label uppercase font-semibold tracking-tight text-center text-nowrap">
+		<div
+			class="pokemon-card-name label uppercase font-semibold tracking-tight text-center text-nowrap"
+			data-flip-id="pokemon-card-name-{pokemon.id}"
+		>
 			{pokemon.pokemon_species.name}
 		</div>
 		<div class="circle rounded-full bg-blue-200/80 border-2 border-blue-200/80">
@@ -30,6 +34,7 @@
 				alt={pokemon.pokemon_species.name}
 				class="sprite relative top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 align-middle z-10"
 				src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`}
+				data-flip-id="pokemon-card-sprite-{pokemon.id}"
 				transition:scale={{ duration: 500, delay, opacity: 0.5, start: 0.0, easing: quintOut }}
 			/>
 		</div>
