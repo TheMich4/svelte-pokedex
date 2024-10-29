@@ -3,8 +3,6 @@
 
 	export let data;
 	export let caught = false;
-
-	console.log({ data, caught });
 </script>
 
 <div
